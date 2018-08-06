@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Upload crash logs</title>
+</head>
+<body>
+
+<script>
+    function checkExt2() {
+        if(document.frmstartUp.logFileUp.value=="" || document.frmstartUp.symDir.value=="") {
+            alert("Please select file");
+            return false;
+        }
+        if(document.frmstartUp.logFileUp.value.lastIndexOf(".txt")==-1 || document.frmstartUp.symDir.value.lastIndexOf(".txt")==-1) {
+            alert("Please upload only .txt extention file");
+            return false;
+        }
+
+    }
+
+    function required()
+    {
+        var empt = document.forms["frmstartUp"]["logFileUp"].value;
+        if (empt == "")
+        {
+            alert("Please input a Value : logFileUp ");
+            return false;
+        }
+        var empt = document.forms["frmstartUp"]["symDir"].value;
+        if (empt == "")
+        {
+            alert("Please input a Value : symDir");
+            return false;
+        }
+
+    }
+
+</script>
+
+<p> This is an Upload crash page</p>
+
+<form action="http://localhost:3000/goLogUpload/startLogUpload" method="post" name="frmstartUp" enctype="multipart/form-data" onsubmit="return required()">
+
+    <label> Logcat File:</label><br>
+    <input type="file" name="logFileUp"><br><br>
+    <label> Symbol Directory path @46 :</label><br>
+    <input type="text" name="symDir"><br><br>
+    <input type="submit" value="Submit">
+
+</form>
+</body>
+</html>

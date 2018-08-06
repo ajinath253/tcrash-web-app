@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Crash from logcat</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <script>
+        function validateLogFile() {
+            var file = document.frmUp.inLogFile.value;
+            alert("info : " + file);
+            if (file == "") {
+                alert("Please select file");
+                return false;
+            }
+        }
+        function showCrash() {
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', "goLogUpload/showCrash", true);
+            xhr.send();
+            return;
+        }
+
+
+    </script>
+
+
+    <style>
+        body{
+            background-color: ghostwhite;
+        }
+
+        .ajay{
+            padding-bottom: 25px;
+            padding-top: 12px;
+        }
+        .btnAj{
+
+            display: inline-block;
+            padding: 3px 49px;
+            margin-bottom: 0;
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 1.42857143;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: middle;
+            -ms-touch-action: manipulation;
+            touch-action: manipulation;
+            cursor: pointer;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            background-image: none;
+            border: 1px solid transparent;
+            border-radius: 4px;
+        }
+    </style>
+
+</head>
+<body>
+
+<div class="jumbotron text-center ajay">
+    <h3>Crash Analysis Portal</h3>
+</div>
+
+<div class="container-fluid ajay">
+    <div class="row">
+        <div class="col-sm-12" >
+
+            <div class="col-sm-6" >
+                    <h3>Steps to debug native crash with logcat file</h3>
+                    <ul>
+                        <li>Collect logcat with adb command. e.g. adb logcat > logcat.txt</li>
+                        <li>Copy symbols to @46 server from out/target/product/DEVICE_NAME/symbols</li>
+                        <li>Give the path of copied symbols from @46 server</li>
+                    </ul>
+
+           </div>
+
+            <div class="col-sm-6"  >
+                <form action="goLogUpload/startLogUpload" enctype="multipart/form-data" name="frmUp" method="post">
+                    <label> Select crash logcat file : </label>
+                    <input type="file" class="form-control" name="logFileUp" align="center" onchange=showCrash();><br>
+                    <label> Enter symbol directory @ 10.11.10.46: </label>
+                    <input type="text" class="form-control" name="symDir"><br><br>
+                    <button type="submit" class="btn btn-primary btnAj" onclick=validateLogFile();>Submit</button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

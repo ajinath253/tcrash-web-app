@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <title>show progress</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <script>
+        function validateLogFile() {
+            var file = document.frmUp.inLogFile.value;
+            alert("info : " + file);
+            if (file == "") {
+                alert("Please select file");
+                return false;
+            }
+        }
+        function showCrash() {
+            var text = document.getElementById("logpath").innerText;
+            document.getElementById("NewFilename").innerHTML= text;
+
+        }
+
+
+    </script>
+
+
+    <style>
+        body{
+            background-color: ghostwhite;
+        }
+
+        .ajay{
+            padding-bottom: 25px;
+            padding-top: 12px;
+        }
+        .btnAj{
+
+            display: inline-block;
+            padding: 3px 49px;
+            margin-bottom: 0;
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 1.42857143;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: middle;
+            -ms-touch-action: manipulation;
+            touch-action: manipulation;
+            cursor: pointer;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            background-image: none;
+            border: 1px solid transparent;
+            border-radius: 4px;
+        }
+        .rnd_broder {
+            border: 2px solid #000000;
+            border-radius: 5px;
+        }
+
+        .checkboxes label {
+            display: block;
+            float: left;
+            padding-right: 10px;
+            padding-left: 22px;
+            text-indent: -22px;
+        }
+        .checkboxes input {
+            vertical-align: middle;
+        }
+        .checkboxes label span {
+            vertical-align: middle;
+        }
+
+        .aj_input[type="submit"] {
+            margin-left: 80px;
+        }
+
+        .aj_h3 {
+            margin-left: 30px;
+        }
+    </style>
+
+</head>
+<body>
+
+<div class="jumbotron text-left ajay ">
+    <h2 class="aj_h3"><b>Crash Analysis Portal</b></h2>
+</div>
+
+<div class="container-fluid ajay">
+    <div class="row">
+        <div class="col-sm-12" >
+
+            <div class="col-sm-12 rnd_broder">
+                <form action="showProgress/startProgress" method="get" name="frmshowProgress" enctype="application/x-www-form-urlencoded">
+                    <h4>Upload files details </h4>
+
+                    <label name="logpath"> Crash log file : </label> <pre> <%= logfile %> </pre>
+                    <input type="hidden" name="logfile" value=<%=logfile%> />
+
+                    <label name="buildFingerPrint"> Build FingerPrint : </label> <pre> <%= buildFingerPrint %> </pre>
+                    <input type="hidden" name="buildFingerPrint" value="<%= buildFingerPrint%>" />
+
+                    <label name="sympath"> Symbols path@46: </label> <pre> <%= symDir %> </pre>
+                    <input type="hidden" name="symDir" value=<%=symDir %> />
+
+                    <h4>Select lib paths and processed </h4>
+
+                    <div class="checkboxes">
+                        <label for="syslib"><input type="checkbox" name="syslib" checked/> <span>system/lib</span></label>
+                        <label for="syslib64"><input type="checkbox" name="syslib64" /> <span>system/lib64</span></label>
+                        <label for="sysvlib"><input type="checkbox" name="sysvlib" /> <span>system/vendor/lib</span></label>
+                        <label for="sysvlib64"><input type="checkbox" name="sysvlib64" /> <span>system/vendor/lib64</span></label>
+                    </div>
+
+                    <input type="submit" class="btn btn-primary btnAj aj_input" value="Start Anlaysis"><br>
+                    <label> </label>
+                </form>
+
+            </div>
+
+
+        </div>
+    </div>
+
+    <div class="row">
+        <label> </label>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12" >
+                <div class="col-sm-12 rnd_broder">
+                  <h4>Crash in uploded file </h4>
+                  <pre id="crashView"> <%= crashView%> </pre>
+                </div>
+        <div>
+    </div>
+</div>
+
+</body>
+</html>

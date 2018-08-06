@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Upload crash logs</title>
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="-1" />
+</head>
+<body>
+
+<script>
+    function required()
+    {
+        var empt = document.forms["frmstartUp"]["logFileUp"].value;
+        if (empt == "")
+        {
+            alert("Please input a Value : logFileUp ");
+            return false;
+        }
+        var empt = document.forms["frmstartUp"]["symDir"].value;
+        if (empt == "")
+        {
+            alert("Please input a Value : symDir");
+            return false;
+        }
+        return true;
+
+    }
+</script>
+
+<p> This is an Upload crash page</p>
+
+<form action="http://localhost:3000/goLogUpload/startLogUpload" method="post" name="frmstartUp" enctype="multipart/form-data" >
+
+    <label> Logcat File:</label><br>
+    <input type="file" name="logFileUp"><br><br>
+
+    <label> Symbol Directory path @46 :</label><br>
+    <input type="text" name="symDir"><br><br>
+
+    <input type="submit" value="Submit" onclick="return required()">
+
+</form>
+</body>
+</html>
